@@ -1,0 +1,42 @@
+const fs = require('fs')
+const url = require('url')
+const path = require('path')
+const qs = require('querystring')
+const database = require('../config/db')
+
+module.exports = (req, res) => {
+  req.pathname = req.pathname || url.parse(req.url).pathname
+
+  if (req.pathname === '/product/add' && req.method === 'GET') {
+    let filepath = path.normalize(path.join(__dirname, '../../public/views/add-product.html'))
+
+    fs.readFile(filepath, (err, data) => {
+      if (err) {
+        res.writeHead(404, {'Content-Type': 'text/plain'})
+        res.write('Not found, buddy!')
+        res.end()
+        return
+      }
+
+      res.writeHead(200, {'Content-Type': 'text/html'})
+      res.write(data)
+      res.end()
+    })
+  } else if (req.pathname === '/product/add' && req.method === 'POST') {
+    let dataString = ''
+
+    req.on('data', (data) => {
+      dataString += data
+    })
+
+    req.on('end', () => {
+      let product = qs.parse(dataString)
+      database.products.add(product)
+
+      res.writeHead(302, {Location: '/'})
+      res.end()
+    })
+  } else {
+    return true
+  }
+}
