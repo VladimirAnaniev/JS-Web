@@ -3,14 +3,14 @@ const url = require('url')
 const path = require('path')
 const multiparty = require('multiparty')
 const shortid = require('shortid')
-
-const database = require('../config/db')
+const Product = require('../models/product')
+const Category = require('../models/category')
 
 module.exports = (req, res) => {
   req.pathname = req.pathname || url.parse(req.url).pathname
 
   if (req.pathname === '/product/add' && req.method === 'GET') {
-    let filepath = path.normalize(path.join(__dirname, '../../public/views/add-product.html'))
+    let filepath = path.normalize(path.join(__dirname, '../../public/views/product/add.html'))
 
     fs.readFile(filepath, (err, data) => {
       if (err) {
@@ -20,9 +20,18 @@ module.exports = (req, res) => {
         return
       }
 
-      res.writeHead(200, {'Content-Type': 'text/html'})
-      res.write(data)
-      res.end()
+      Category.find().then((categories) => {
+        let replacement = '<select class="input-field" name="category">'
+        for (let category of categories) {
+          replacement += `<option value="${category._id}">${category.name}</option>`
+        }
+        replacement += '</select>'
+
+        let html = data.toString().replace('{categories}', replacement)
+        res.writeHead(200, {'Content-Type': 'text/html'})
+        res.write(html)
+        res.end()
+      })
     })
   } else if (req.pathname === '/product/add' && req.method === 'POST') {
     let form = new multiparty.Form()
@@ -63,10 +72,15 @@ module.exports = (req, res) => {
     })
 
     form.on('close', () => {
-      database.products.add(product)
+      Product.create(product).then((dbProduct) => {
+        Category.findById(product.category).then((category) => {
+          category.products.push(dbProduct._id)
+          category.save()
 
-      res.writeHead(302, {Location: '/'})
-      res.end()
+          res.writeHead(302, {Location: '/'})
+          res.end()
+        })
+      })
     })
 
     form.parse(req)

@@ -10,7 +10,7 @@ const getContentType = (url) => {
 }
 
 const notAllowed = (url) => {
-  return !(url.endsWith('ico') || url.endsWith('.css') || url.endsWith('.html') || url.endsWith('.jpg'))
+  return !(url.endsWith('.ico') || url.endsWith('.css') || url.endsWith('.html') || url.endsWith('.jpg'))
 }
 
 module.exports = (req, res) => {
@@ -20,7 +20,7 @@ module.exports = (req, res) => {
     let filepath = path.normalize(path.join(__dirname, `../../${req.pathname}`))
 
     fs.readFile(filepath, (err, data) => {
-      if (err || notAllowed(url)) {
+      if (err || notAllowed(filepath)) {
         res.writeHead(404, {'Content-Type': 'text/plain'})
         res.write('Not found, buddy!')
         res.end()
