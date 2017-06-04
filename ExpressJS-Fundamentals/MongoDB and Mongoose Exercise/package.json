@@ -1,0 +1,11 @@
+{
+  "name": "mongodb-and-mongoose-exercise",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mongoose": "^4.10.4"
+  }
+}
