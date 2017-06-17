@@ -1,0 +1,12 @@
+extends ../layouts/layout
+
+block content
+    h1.head-title Admins
+    a.btn.btn-primary(href='/admins/add') Add admins
+
+    for admin in admins
+        div
+            h3= admin.username
+            form(method="post" action='/admins/remove/' + admin.username)
+                input.btn-danger.btn(type='submit', value='Remove')
+

@@ -1,0 +1,40 @@
+doctype html
+
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(http-equiv='X-UA-Compatible', content='ie=edge')
+    title Express Exam
+    link(rel='stylesheet', type='text/css', href='/css/site.css')
+  body
+    header
+      nav.nav
+        ul
+          li
+            a(href='/') Home Page
+          li.delimeter
+
+          if currentUser
+            li
+              a(href='/tweet') Tweet
+            if currentUser.roles.includes('Admin')
+              li.align-right
+                a(href='/admins/all') Admin Panel
+            li.align-right= currentUser.username
+            li.align-right
+              form#logout(method="post" action="/users/logout")
+                a(href="javascript:document.getElementById('logout').submit()") Logout
+          else
+            li.align-right
+              a(href='/users/register') Register
+            li.align-right
+              a(href='/users/login') Login
+    if globalError
+      h2.error-msg= globalError
+
+    main
+      block content
+
+    footer
+      p &copy; ExpressJs Fundamentals Exam

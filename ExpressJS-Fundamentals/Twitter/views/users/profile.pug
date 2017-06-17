@@ -1,0 +1,18 @@
+extends ../layouts/layout
+
+block content
+    h1.head-title= 'Profile for '+user.username
+
+    for tweet in tweets
+        .product-card
+            p= tweet.author.username
+            p= tweet.content
+            span= 'Views: '+ tweet.views
+            span= ' Likes: '+ tweet.likes.length
+            if currentUser
+                if tweet.likes.indexOf(currentUser._id) >= 0
+                    form(method="post" action='/tweet/dislike/' + tweet._id)
+                        input.btn(type='submit', value='Dislike')
+                else
+                    form(method="post" action='/tweet/like/' + tweet._id)
+                        input.btn(type='submit', value='Like')

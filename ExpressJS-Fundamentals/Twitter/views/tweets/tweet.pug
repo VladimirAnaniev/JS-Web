@@ -1,0 +1,10 @@
+extends ../layouts/layout.pug
+
+block content
+    form.form.center-form(method='post')
+        h2 New Tweet
+        .form-group
+            label(for='content') Content
+            textarea#content.input-field(name='content', maxlength=140)
+        .form-group
+            input.form-btn.btn(type='submit', value='Tweet')
