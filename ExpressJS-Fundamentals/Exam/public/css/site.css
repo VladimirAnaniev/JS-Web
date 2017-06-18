@@ -182,6 +182,32 @@ textarea.input-field {
   float: right
 }
 
+.text-right {
+  text-align: right;
+}
+
+.message {
+  font-size: 1.5em;
+  border-bottom:  1px solid black;
+  word-wrap: break-word;
+}
+
+.liked {
+  background-color: lightgreen;
+}
+
 footer {
   padding: 15px;
+}
+
+.search-btn {
+  margin-left: 30%;
+}
+
+.thread {
+  font-size: 2em;
+}
+
+.small {
+  font-size: 0.7em;
 }

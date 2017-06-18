@@ -5,7 +5,7 @@ let rootPath = path.normalize(path.join(__dirname, '/../../'))
 module.exports = {
   development: {
     rootPath: rootPath,
-    db: 'mongodb://localhost:27017/express-templat',
+    db: 'mongodb://localhost:27017/messenger',
     port: 1337
   },
   staging: {

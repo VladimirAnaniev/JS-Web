@@ -5,7 +5,7 @@ html(lang='en')
     meta(charset='UTF-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(http-equiv='X-UA-Compatible', content='ie=edge')
-    title Express Exam
+    title Messenger
     link(rel='stylesheet', type='text/css', href='/css/site.css')
   body
     header
@@ -16,9 +16,6 @@ html(lang='en')
           li.delimeter
 
           if currentUser
-            if currentUser.roles.includes('Admin')
-              li.align-right
-                a(href='/admins/all') Admin Panel
             li.align-right= currentUser.username
             li.align-right
               form#logout(method="post" action="/users/logout")

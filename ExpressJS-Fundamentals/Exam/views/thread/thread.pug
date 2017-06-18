@@ -1,0 +1,45 @@
+extends ../layouts/layout
+
+block content
+    if user
+        h1.head-title= 'Thread with ' + user.username
+
+        if currentUser.blocked.indexOf(user.username) >= 0
+            form.form(method='post' action='/unblock/' + user.username)
+                .form-group
+                    input.form-btn.btn(type='submit', value='Unblock')
+        else
+            form.form(method='post' action='/block/' + user.username)
+                .form-group
+                    input.form-btn.btn(type='submit', value='Block')
+
+        for message in messages
+            .message(class= message.liked ? 'liked' : '')
+                p(class = message.from.username === currentUser.username ? 'text-right' : '')
+                    if message.isLink
+                        a(href=message.message)=message.message
+                    else if message.isImage
+                        img(src=message.message)
+                    else
+                        strong= message.message
+
+                    br
+                    span.small= "Sent on: " + message.sent.toLocaleString()
+
+                    if message.from.username !== currentUser.username && message.liked
+                        form#dislike(method="post" action="/dislike/" + message._id)
+                            input(type='submit' value='Dislike')
+                    else if message.from.username !== currentUser.username && !message.liked
+                        form#like(method="post" action="/like/" + message._id)
+                            input(type='submit' value='Like')
+
+
+
+        if !blocked
+            form.form.center-form(method='post')
+                h2 Send message
+                .form-group
+                    label(for='message') Message
+                    input#message.input-field(name='message' type='text' maxlength=1000)
+                .form-group
+                    input.form-btn.btn(type='submit', value='Send')

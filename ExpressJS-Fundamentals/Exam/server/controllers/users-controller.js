@@ -64,5 +64,15 @@ module.exports = {
   logout: (req, res) => {
     req.logout()
     res.redirect('/')
+  },
+  block: (req, res) => {
+    User.findByIdAndUpdate(req.user._id, {$push: {blocked: req.params.username}}).then(() => {
+      res.redirect('/thread/' + req.params.username)
+    })
+  },
+  unblock: (req, res) => {
+    User.findByIdAndUpdate(req.user._id, {$pull: {blocked: req.params.username}}).then(() => {
+      res.redirect('/thread/' + req.params.username)
+    })
   }
 }

@@ -1,4 +1,20 @@
 extends ../layouts/layout
 
 block content
-  h1.head-title Home Page
+  if currentUser
+    h1.head-title Messenger
+    .form-group
+      label(for='username') Username
+      input#username.input-field(name='username', type='text')
+      a.search-btn.btn(href='javascript:window.location.replace("/thread/"+document.getElementById("username").value)') Search
+
+    h1 Past conversations
+    for thread in threads
+      div
+        if thread.user1.username===currentUser.username
+          a.thread(href='/thread/'+ thread.user2.username)= thread.user2.username
+        else
+          a.thread(href='/thread/'+ thread.user1.username)= thread.user1.username
+      span= 'Last updated: ' + thread.updated.toLocaleString()
+  else
+    h1.head-title Welcome to Messenger, please log in

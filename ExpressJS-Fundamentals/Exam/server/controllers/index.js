@@ -1,7 +1,7 @@
 const home = require('./home-controller')
 const users = require('./users-controller')
-const admins = require('./admins-controller')
+const thread = require('./thread-controller')
 
 module.exports = {
-  home, users, admins
+  home, users, thread
 }
