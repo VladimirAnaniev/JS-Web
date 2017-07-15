@@ -1,4 +1,4 @@
-import Auth from './auth'
+import Auth from '../auth/auth'
 const baseUrl = 'http://localhost:5000'
 
 const getOptions = () => ({

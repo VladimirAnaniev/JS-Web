@@ -1,12 +1,10 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 
-class Home extends Component {
-  render () {
-    return (
-      <div>HOME</div>
-    )
-  }
+function Home (props) {
+  return (
+    <div>HOME</div>
+  )
 }
 
 const mapStateToProps = (state) => {

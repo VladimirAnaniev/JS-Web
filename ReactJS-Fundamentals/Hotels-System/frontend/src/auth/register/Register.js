@@ -2,13 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import RegisterForm from './RegisterForm'
 import { changeRegisterForm, register } from '../authActions'
+import FormHelper from '../../utils/formHelper'
 
 class Register extends Component {
   onFormChange = event => {
-    const target = event.target
-    const field = target.name
-    const value = target.value
-    let newState = Object.assign({}, this.props.formState, {[field]: value})
+    let newState = FormHelper.handleFormChange(event, this.props.formState)
 
     this.props.onFormChange(newState)
   }

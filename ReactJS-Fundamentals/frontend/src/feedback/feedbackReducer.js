@@ -1,7 +1,7 @@
 import {
   SUCCESS,
   ERROR
-} from '../utils/actionTypes.js'
+} from './feedbackActionTypes.js'
 
 const initialState = {
   error: '',

@@ -1,9 +1,10 @@
 import {
   CHANGE_LOGIN_FORM,
   CHANGE_REGISTER_FORM,
-  CHANGE_LOGGED_IN_STATUS
-} from '../utils/actionTypes'
-import Auth from '../utils/auth'
+  CHANGE_LOGGED_IN_STATUS,
+  RESET_AUTH_FROMS
+} from './authActionTypes.js'
+import Auth from './auth'
 
 const initialState = {
   registerForm: {
@@ -32,6 +33,11 @@ export default function authReducer (state = initialState, action) {
     case CHANGE_LOGGED_IN_STATUS:
       return Object.assign({}, state, {
         isLoggedIn: action.newState
+      })
+    case RESET_AUTH_FROMS:
+      return Object.assign({}, state, {
+        registerForm: initialState.registerForm,
+        loginForm: initialState.loginForm
       })
     default:
       return state

@@ -1,10 +1,12 @@
 import {
   SUCCESS,
   ERROR
-} from '../utils/actionTypes.js'
+} from './feedbackActionTypes.js'
+import FormHelper from '../utils/formHelper'
 
-export function error (message) {
+export function error (err) {
   return (dispatch) => {
+    let message = FormHelper.getFirstError(err)
     dispatch({type: ERROR, message})
 
     setTimeout(() => {

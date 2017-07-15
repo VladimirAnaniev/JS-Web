@@ -3,7 +3,7 @@ import {
   CHANGE_REGISTER_FORM,
   CHANGE_LOGGED_IN_STATUS,
   RESET_AUTH_FROMS
-} from '../utils/actionTypes'
+} from './authActionTypes.js'
 import Auth from '../utils/auth'
 import REST from '../utils/rest'
 import Validator from '../utils/validator'
@@ -13,21 +13,21 @@ export function register (user) {
   return (dispatch) => {
     let validation = Validator.validateRegistration(user)
     if (!validation.isValid) {
-      dispatch(error(validation.message))
+      dispatch(error(validation))
       return
     }
 
     REST.post('auth/signup', user)
       .then(result => {
         if (!result.success) {
-          dispatch(error(result.message))
+          dispatch(error(result))
           return
         }
 
         dispatch(registerSuccess(user))
       })
       .catch(err => {
-        dispatch(error(err.message))
+        dispatch(error(err))
       })
   }
 }
@@ -44,21 +44,21 @@ export function login (user) {
   return (dispatch) => {
     let validation = Validator.validateLogin(user)
     if (!validation.isValid) {
-      dispatch(error(validation.message))
+      dispatch(error(validation))
       return
     }
 
     REST.post('auth/login', user)
       .then(result => {
         if (!result.success) {
-          dispatch(error(result.message))
+          dispatch(error(result))
           return
         }
 
         dispatch(loginSuccess(result.token, result.user))
       })
       .catch(err => {
-        dispatch(error(err.message))
+        dispatch(error(err))
       })
   }
 }
