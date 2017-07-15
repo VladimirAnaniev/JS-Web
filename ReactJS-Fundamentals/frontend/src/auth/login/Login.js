@@ -3,6 +3,13 @@ import {connect} from 'react-redux'
 import LoginForm from './LoginForm'
 import { changeLoginForm, login } from '../authActions'
 import FormHelper from '../../utils/formHelper'
+import { func, object } from 'prop-types'
+
+Login.propTypes = {
+  formState: object,
+  onFormChange: func,
+  onFormSubmit: func
+}
 
 function Login ({formState, onFormChange, onFormSubmit}) {
   return (

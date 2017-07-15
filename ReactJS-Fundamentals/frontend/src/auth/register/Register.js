@@ -3,6 +3,13 @@ import {connect} from 'react-redux'
 import RegisterForm from './RegisterForm'
 import { changeRegisterForm, register } from '../authActions'
 import FormHelper from '../../utils/formHelper'
+import { func, object } from 'prop-types'
+
+Register.propTypes = {
+  formState: object,
+  onFormChange: func,
+  onFormSubmit: func
+}
 
 function Register ({formState, onFormChange, onFormSubmit}) {
   return (

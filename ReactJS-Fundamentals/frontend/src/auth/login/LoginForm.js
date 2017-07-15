@@ -1,4 +1,11 @@
 import React from 'react'
+import { func, object } from 'prop-types'
+
+LoginForm.propTypes = {
+  formState: object,
+  onChange: func,
+  onSubmit: func
+}
 
 export default function LoginForm ({formState, onChange, onSubmit}) {
   return (

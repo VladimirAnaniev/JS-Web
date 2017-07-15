@@ -1,6 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { clearError, clearSuccess } from './feedbackActions'
+import { func, string } from 'prop-types'
+
+Feedback.propTypes = {
+  error: string,
+  success: string,
+  handleSuccessClick: func,
+  handleErrorClick: func
+}
 
 function Feedback ({error, success, handleSuccessClick, handleErrorClick}) {
   return (

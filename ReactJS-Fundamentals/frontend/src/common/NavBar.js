@@ -1,6 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { bool } from 'prop-types'
+
+NavBar.propTypes = {
+  isLoggedIn: bool
+}
 
 function NavBar ({isLoggedIn = false}) {
   if (isLoggedIn) {
