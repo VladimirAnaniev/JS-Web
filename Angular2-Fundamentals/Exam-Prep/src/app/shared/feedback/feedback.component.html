@@ -1,0 +1,5 @@
+<div *ngIf="message" class="feedback-container">
+  <span [class]="type" (click)="clear()">
+    {{message}}
+  </span>
+</div>

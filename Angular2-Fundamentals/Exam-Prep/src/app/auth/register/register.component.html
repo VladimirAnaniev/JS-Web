@@ -1,0 +1,85 @@
+<!-- <h1>Register</h1>
+<form style="margin: 0 auto; width: 60%;" #registerForm="ngForm" (ngSubmit)="register(registerForm.value)" autocomplete="on">
+  <div>
+    <label for="email">Email</label>
+    <input (ngModel)="email" type="text" id="email" name="email" required #email="ngModel" />
+    <div *ngIf="errors.email" class="warning">
+      {{errors.email}}
+    </div>
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input (ngModel)="password" type="password" id="password" name="password" #password="ngModel" required />
+    <div *ngIf="errors.password" class="warning">
+      {{errors.password}}
+    </div>
+  </div> 
+  
+  <div>
+    <label for="name">Name</label>
+    <input (ngModel)="name" type="text" id="name" name="name" required #name="ngModel" />
+    <div *ngIf="errors.name" class="warning">
+      {{errors.name}}
+    </div>
+  </div> 
+
+  <button type="submit" [disabled]="registerForm.invalid">Register</button>
+</form> -->
+
+<md-card class="wrapper">
+  <md-card-title>Register</md-card-title>
+  <md-card-content>
+    <form #registerForm="ngForm" (ngSubmit)="register(registerForm.value)">
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="email" 
+          placeholder="Email" 
+          type="email" 
+          name="email" 
+          required 
+        />
+        <md-hint align="start" *ngIf="errors.email" [ngStyle]="{'color': 'red'}">
+          {{errors.email}}
+        </md-hint>
+        <md-error *ngIf="registerForm.hasError('required','email')">
+          Email is required.
+        </md-error>
+      </md-input-container>
+
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="password" 
+          placeholder="Password" 
+          type="password" 
+          name="password" 
+          required 
+        />
+        <md-hint align="start" *ngIf="errors.password" [ngStyle]="{'color': 'red'}">
+          {{errors.password}}
+        </md-hint>
+        <md-error *ngIf="registerForm.hasError('required','password')">
+          Password is required.
+        </md-error>
+      </md-input-container> 
+
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="name" 
+          placeholder="Name" 
+          type="text" 
+          name="name" 
+          required
+        />
+        <md-hint align="start" *ngIf="errors.name" [ngStyle]="{'color': 'red'}">
+          {{errors.name}}
+        </md-hint>
+        <md-error *ngIf="registerForm.hasError('required','name')">
+          Name is required.
+        </md-error>
+      </md-input-container> 
+
+      <button md-raised-button type="submit" [disabled]="registerForm.invalid">Register</button>
+    </form>
+  </md-card-content>
+</md-card>

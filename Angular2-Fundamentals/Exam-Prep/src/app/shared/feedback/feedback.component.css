@@ -1,0 +1,12 @@
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
+.feedback-container {
+  padding: 10px;
+  text-align: center;
+}
