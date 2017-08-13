@@ -1,0 +1,10 @@
+.wrapper {
+  width: 50%;
+  margin: auto;
+  margin-top: 15px;
+}
+
+md-input-container, md-select {
+  width: 100%;
+  padding: 5px;
+}

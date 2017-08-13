@@ -1,0 +1,12 @@
+<nav md-tab-nav-bar style="text-align:center">
+  <a md-tab-link
+    *ngFor="let link of links; let i = index"
+    [routerLink]="link.path"
+    [active]="activeLinkIndex === i"
+    (click)="activeLinkIndex = i">
+      {{link.label}}
+  </a>
+  <a *ngIf="isAuthenticated" md-tab-link href='#' (click)='logout()'>
+    Logout
+  </a>
+</nav>

@@ -1,0 +1,33 @@
+<md-card class="wrapper">
+  <md-card-title>All Animals</md-card-title>
+  <md-card-content>
+    
+    <md-input-container>
+      <input mdInput 
+        [(ngModel)]="searchQuery" 
+        placeholder="Search" 
+        type="text" 
+      />
+    </md-input-container> 
+    <button md-raised-button (click)="search()">Search</button>
+
+    <md-list *ngIf='animals'>
+      <md-list-item *ngFor='let animal of animals' >
+        <a 
+        [routerLink]="['/animals/details', animal.id]"
+        >{{animal.name}} - A {{animal.color}} {{animal.type}} aged {{animal.age}}</a>
+      </md-list-item>
+    </md-list>
+
+    <h2 *ngIf='!animals'>No animals on tis page!</h2>
+
+    <button [disabled]='this.page <= 1' md-raised-button (click)='prevPage()'>Previous</button>
+    <button
+      md-raised-button 
+      [disabled]='!this.animals || this.animals.length < 10' 
+      (click)='nextPage()'
+    >
+      Next
+    </button>
+  </md-card-content>
+</md-card>

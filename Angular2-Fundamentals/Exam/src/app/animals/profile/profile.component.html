@@ -1,0 +1,15 @@
+<md-card class="wrapper">
+    <md-card-title>My Animals</md-card-title>
+    <md-card-content>
+      <md-list *ngIf='animals'>
+        <md-list-item *ngFor='let animal of animals' >
+          <a 
+          [routerLink]="['/animals/details', animal.id]"
+          >{{animal.name}} - A {{animal.color}} {{animal.type}} aged {{animal.age}}</a>
+          <button md-button (click)='delete(animal.id)'>delete</button>
+        </md-list-item>
+      </md-list>
+  
+      <h2 *ngIf='!animals || animals.length === 0'>You have no animals buddy!</h2>
+    </md-card-content>
+  </md-card>

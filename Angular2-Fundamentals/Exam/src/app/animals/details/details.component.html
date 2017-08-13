@@ -1,0 +1,40 @@
+<md-card class="wrapper">
+    <md-card-title>Details</md-card-title>
+    <md-card-content>
+      <h2 *ngIf='animal && !animal.name'>No such Animal</h2>
+
+      <div class="details" *ngIf='animal && animal.name'>
+        <h2>{{animal.name}}</h2>
+        <img [src]='animal.image' [alt]='animal.name' />
+        <p>Type: {{animal.type}}</p>
+        <p>Age: {{animal.age}}</p>
+        <p>Color: {{animal.color}}</p>
+        <p>Price: {{animal.price}}</p>
+        <p *ngIf='animal.breed'>{{animal.breed}}</p>
+      </div>
+
+      <div>
+        <md-select placeholder="Reaction" (change)='reactionChange($event.value)' >
+          <md-option 
+            *ngFor="let reaction of ['like', 'love', 'haha', 'wow', 'sad', 'angry']" 
+            [value]="reaction">
+              {{ reaction }}
+          </md-option>
+        </md-select>
+      </div>
+
+      <div>
+        <md-input-container>
+          <input mdInput 
+            #commentInput
+            placeholder="Comment message" 
+            type="text" />
+        </md-input-container> 
+        <button md-raised-button (click)="comment(commentInput.value)">Comment</button>
+
+        <div *ngFor='let comment of comments'>
+          <strong>{{comment.user}}:</strong> {{comment.message}}
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>

@@ -1,0 +1,88 @@
+<md-card class="wrapper">
+  <md-card-title>Create</md-card-title>
+  <md-card-content>
+    <form #createForm="ngForm" (ngSubmit)="create(createForm.value)">
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="name" 
+          placeholder="Name" 
+          type="text" 
+          name="name" 
+          required 
+        />
+        <md-error *ngIf="createForm.hasError('required','name')">
+          Name is required.
+        </md-error>
+      </md-input-container>
+
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="age" 
+          placeholder="Age" 
+          type="number" 
+          name="age" 
+          required 
+        />
+        <md-error *ngIf="createForm.hasError('required','age')">
+          Age is required.
+        </md-error>
+      </md-input-container> 
+
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="color" 
+          placeholder="Color" 
+          type="text" 
+          name="color" 
+          required
+        />
+        <md-error *ngIf="createForm.hasError('required','color')">
+          Color is required.
+        </md-error>
+      </md-input-container> 
+
+      <md-select placeholder="Type" (ngModel)="type" name="type" required>
+        <md-option *ngFor="let type of ['Cat', 'Dog', 'Bunny', 'Exotic', 'Other']" [value]="type">
+          {{ type }}
+        </md-option>
+      </md-select>
+
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="price" 
+          placeholder="Price" 
+          type="number" 
+          name="price" 
+          required
+        />
+        <md-error *ngIf="createForm.hasError('required','price')">
+          Price is required.
+        </md-error>
+      </md-input-container>
+      
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="image" 
+          placeholder="Image" 
+          type="text" 
+          name="image" 
+          required
+        />
+        <md-error *ngIf="createForm.hasError('required','image')">
+          Image is required.
+        </md-error>
+      </md-input-container> 
+
+      <md-input-container>
+        <input mdInput 
+          (ngModel)="breed" 
+          placeholder="Breed" 
+          type="text" 
+          name="breed"
+        />
+      </md-input-container> 
+
+      <button md-raised-button type="submit" [disabled]="createForm.invalid">Create</button>
+    </form>
+  </md-card-content>
+</md-card>
